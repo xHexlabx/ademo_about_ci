@@ -110,6 +110,6 @@ src/
 - [Vite](https://vitejs.dev/)
 - [React Router](https://reactrouter.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [ShadCN](https://shadcn.dev/)
+- [ShadCN](https://ui.shadcn.com/)
 
 ---
