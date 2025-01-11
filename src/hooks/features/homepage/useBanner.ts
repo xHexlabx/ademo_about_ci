@@ -1,3 +1,5 @@
+import { api } from '@/api/axios';
+import { AxiosError } from 'axios';
 import { useState, useEffect } from 'react';
 
 export default function useBanner() {
@@ -8,18 +10,17 @@ export default function useBanner() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://dog.ceo/api/breeds/image/random');
-
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-
+        const response = await api.get('/breeds/image/random');
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        const data = await response.json();
+        const data = response.data;
         setUrl(data.message);
-      } catch {
-        setError('Failed to fetch banner. Please try again later.');
+      } catch (error) {
+        setError(
+          error instanceof AxiosError
+            ? error.message
+            : 'An unknown error occurred'
+        );
       } finally {
         setLoading(false);
       }
